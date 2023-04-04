@@ -2,17 +2,26 @@ const userModel = require("../models/userModel")
 
 const jwt = require('jsonwebtoken')
 
+const bcrypt = require('bcrypt')
+
 
 exports.createUser = async(req,res)=>{
 try {
     
-        let data = req.body
-        let createdUser = await userModel.create(data)
-        return res.status(201).send({status:true, data:createdUser})
+        let {firstName, lastName, password,email,phone} = req.body
+
+        let pwd = await bcrypt.hash(password,10)
+
+        let userData = {firstName:firstName,lastName:lastName,password:pwd,email:email,phone:phone}
+
+        let saveData = await userModel.create(userData)
+
+
+        return res.status(201).send({status:true,message:"user created successfully",data:saveData})
           
 } catch (error) {
 
-    res.status(500).send({status:true, message:"user created successfully"})
+    res.status(500).send({status:false, message:error.message})
     
 }
 }
@@ -24,15 +33,21 @@ exports.login = async (req, res) => {
 
         if (!email || !password) return res.status(400).send({ status: false, message: "plz provide both email and password" })
 
-        let user = await userModel.findOne({ email : email, password : password })
+        let findCredential = await userModel.findOne({ email : email})
+        console.log(findCredential)
+        if (!findCredential) return res.status(400).send({ status: false, message: "plz provide valid email or password" })
 
-        if (!user) return res.status(400).send({ status: false, message: "plz provide valid email or password" })
+        let checkPass = await bcrypt.compare(password, findCredential.password);
+console.log(checkPass)
 
-        let token = jwt.sign({ email: user.email }, "prashant", {
+        if (!checkPass) return res.status(400).send({ status: false, message: "password is incorrect" });
+
+
+        let token = jwt.sign({ email: findCredential.email }, "prashant", {
             expiresIn: "1h"
         })
 
-        return res.status(201).send({ token })
+        return res.status(201).send({status:true, token:token })
     } catch (error) {
         res.status(500).send({ status: false, message: error.message })
     }
