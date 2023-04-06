@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let ObjectId = Schema.Types.ObjectId
+let ObjectId = mongoose.Schema.Types.ObjectId
 
 const bookingSchema = new mongoose.Schema({
   busId: {
@@ -13,7 +13,7 @@ const bookingSchema = new mongoose.Schema({
     ref: 'user',
     required: true,
   },
-    numberOfSeat: {
+    numberOfSeats: {
     type: Number,
     required: true,
   },
@@ -23,7 +23,7 @@ const bookingSchema = new mongoose.Schema({
 //   },
   date: {
     type: Date,
-    required: true,
+    // required: true,
   },
 }, { timestamps: true });
 

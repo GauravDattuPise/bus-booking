@@ -15,7 +15,7 @@ try {
 
         // if (!isValidBody(firstName)) return res.status(400).send({ status: false, message: "Please provide your first name" });
 
-    // firstName = checkSpaceBtwWord(firstName);
+        // firstName = checkSpaceBtwWord(firstName);
 
     if (!isValidName(firstName)) return res.status(400).send({ status: false, message: "First name should only contain alphabet" });
 
@@ -86,7 +86,7 @@ console.log(checkPass)
             expiresIn: "1h"
         })
 
-        return res.status(201).send({status:true, token:token })
+        return res.status(200).send({status:true, token:token })
     } catch (error) {
         res.status(500).send({ status: false, message: error.message })
     }
