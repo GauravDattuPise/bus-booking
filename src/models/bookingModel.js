@@ -17,14 +17,16 @@ const bookingSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-//   seatNumber: {
-//     type: Number,
-//     required: true,
-//   },
+  
   date: {
     type: Date,
-    // required: true,
+    required: true,
   },
+
+  bookingDate : {
+    type: Date,
+    required: true
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model('booking', bookingSchema);

@@ -28,7 +28,7 @@ const BusSchema = new Schema({
         type: String
     },
     availableDates: {
-        type: [Date]
+        type: Date
       }
 }, {timestamps: true})
 
