@@ -5,6 +5,8 @@ const {createUser, login, getuser} = require("../controllers/userController")
 const {createBus,  getBus} = require("../controllers/busController")
 
 const {createBooking} = require("../controllers/bookingController")
+
+const {createPassenger} = require("../controllers/passengerController")
 router.post("/createUser", createUser)
 router.post("/login", login)
 
@@ -20,3 +22,7 @@ router.get("/getBus", getBus)
 router.post("/createBooking", createBooking)
 
 module.exports = router
+
+//Passenger API
+
+router.post("/createPassenger", createPassenger)

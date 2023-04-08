@@ -14,7 +14,10 @@ exports.createBus = async (req, res) => {
 exports.getBus = async (req, res)=> {
     try {
         let {startCity, destination, availableDates}= req.query
-        let busData = await busModel.find({'startCity': startCity, 'destination': destination , 'availableDates':availableDates ,availableSeats: { $gt: 0 }})
+        console.log(startCity)
+        console.log(destination)
+        console.log(availableDates)
+        let busData = await busModel.find({startCity: startCity, destination: destination , availableDates:availableDates ,availableSeats: { $gt: 0 }})
         
         if(busData.length==0){
             return  res.status(404).send({status:false, message: "bus  is not available"})
