@@ -7,7 +7,11 @@ const {createBus,  getBus} = require("../controllers/busController")
 const {createBooking} = require("../controllers/bookingController")
 
 const {createPassenger} = require("../controllers/passengerController")
+
+const {authentication,authorization} = require("../middleware/auth")
+
 router.post("/createUser", createUser)
+
 router.post("/login", login)
 
 router.get("/getuser", getuser)
@@ -21,8 +25,8 @@ router.get("/getBus", getBus)
 
 router.post("/createBooking", createBooking)
 
-module.exports = router
 
 //Passenger API
+router.post("/createPassenger",authentication,createPassenger)
 
-router.post("/createPassenger", createPassenger)
+module.exports = router
