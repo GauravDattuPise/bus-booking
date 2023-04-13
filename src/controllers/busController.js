@@ -14,9 +14,9 @@ exports.createBus = async (req, res) => {
 exports.getBus = async (req, res)=> {
     try {
         let {startCity, destination, availableDates}= req.query
-        console.log(startCity)
-        console.log(destination)
-        console.log(availableDates)
+        console.log(startCity, "start")
+        console.log(destination, "des")
+        console.log(availableDates, "avi")
         let busData = await busModel.find({startCity: startCity, destination: destination , availableDates:availableDates ,availableSeats: { $gt: 0 }})
         
         if(busData.length==0){
@@ -27,6 +27,8 @@ exports.getBus = async (req, res)=> {
         res.status(500).send({ status: false, message: error.message })
     }
 }
+
+
 
 
 

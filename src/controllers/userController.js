@@ -94,8 +94,16 @@ console.log(checkPass)
 
 exports.getuser = async(req,res) =>{
     try {
-        let data = req.body
-        let user = await userModel.find(data)
+
+        let data = req.body.email
+
+        if(Object.keys(data).length == 0){
+            return res.status(400).send({status : false, message:"Email is mandatory."})
+        }
+
+        let user = await userModel.findOne({email:data})
+
+        if(!user) return res.status(404).send({status:false, message: "user not found"})
     
     return res.status(200).send({ status:true, data :user })
     } catch (error) {
