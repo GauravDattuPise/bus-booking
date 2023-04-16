@@ -4,7 +4,7 @@ const router = express.Router()
 const {createUser, login, getuser} = require("../controllers/userController")
 const {createBus,  getBus} = require("../controllers/busController")
 
-const {createBooking} = require("../controllers/bookingController")
+const {createBooking, getBooking} = require("../controllers/bookingController")
 
 const {createPassenger} = require("../controllers/passengerController")
 
@@ -23,7 +23,9 @@ router.get("/getBus", getBus)
 
 //Booking API
 
-router.post("/createBooking", createBooking)
+router.post("/createBooking",authentication, createBooking);
+
+router.get('/getBooking/:bookingId',authentication, getBooking);
 
 
 //Passenger API

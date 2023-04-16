@@ -43,7 +43,7 @@ try {
     if(DublicateEmailAndPhone){
         if(DublicateEmailAndPhone.email == email) return res.status(400).send({status:false, message: "email is already exist"})
 
-        // if(DublicateEmailAndPhone.phone == phone) return res.status(400).send({status: false, message: "phone is alredy exist"})
+        if(DublicateEmailAndPhone.phone == phone) return res.status(400).send({status: false, message: "phone is alredy exist"})
     }
 
         let pwd = await bcrypt.hash(password,10)
@@ -82,7 +82,7 @@ console.log(checkPass)
         if (!checkPass) return res.status(400).send({ status: false, message: "password is incorrect" });
 
 
-        let token = jwt.sign({ email: findCredential.email }, "prashant", {
+        let token = jwt.sign({  userId : findCredential["_id" ]}, "prashant", {
             expiresIn: "1h"
         })
 

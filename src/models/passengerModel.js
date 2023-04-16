@@ -1,15 +1,37 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
 
 const passengerSchema = new mongoose.Schema({
   // Define your schema fields here
-  name: String,
-  age: Number,
-  phone: Number,
-  email: String,
-  gender: String,
-  city: String,
-  state: String
+  name:{
+  type: String,
+  required: true
+},
+  age: {
+    type:Number,
+  required:true},
+
+  phone:{ 
+    type:Number,
+  require:true},
+  email:{
+    type:String,
+    required: true
+  },
+  gender: {
+    
+    type: String,
+    enum: ["Male","Female","Other"],
+    required:true
+  },
+  city:{
+    type: String,
+    required:true,
+  },
+  state: {
+    type: String,
+    required:true,
+  }
 });
 
-const MyModel = mongoose.model('passenger', passengerSchema);
+module.exports = mongoose.model('passenger', passengerSchema);

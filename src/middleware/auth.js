@@ -5,6 +5,7 @@ const userModel = require('../models/userModel');
 exports.authentication = async (req,res,next) =>{
 
     let token = req.headers['token'];
+    console.log(token, '12211')
 
     if(!token){
         return res.status(400).send({status : false, message : "token is required"});
@@ -15,8 +16,10 @@ exports.authentication = async (req,res,next) =>{
             return res.status(400).send({status : false, message:err.message})
         }
          else{
-            req.headers['decodedToken'] = tokenVerified.email
+            req.userId = tokenVerified.userId
 
+            req.headers['decodedToken'] = tokenVerified
+        //    console.log( tokenVerified.userId, "ooooo")
             next();
          } 
     })
